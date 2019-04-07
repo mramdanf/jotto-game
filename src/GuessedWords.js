@@ -2,8 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const GuessedWords = (props) => {
+  let content = null
+  if (!props.guessedWords.length) {
+    content = (
+      <span data-test="guess-instruction">
+        Try to guess the secret word!
+      </span>
+    )
+  }
   return (
-    <div></div>
+    <div data-test="component-guessed-words">
+      {content}
+    </div>
   )
 }
 
