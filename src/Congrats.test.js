@@ -18,7 +18,7 @@ const setup = (props={}) => {
 }
 
 test('renders whitout error', () => {
-  const wrapper = setup()
+  const wrapper = setup({ success: false })
   const componentCongrats = findByTestAttr(wrapper, 'component-congrats')
   expect(componentCongrats.length).toBe(1)
 })
