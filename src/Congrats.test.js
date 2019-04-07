@@ -18,11 +18,17 @@ const setup = (props={}) => {
 }
 
 test('renders whitout error', () => {
-
+  const wrapper = setup()
+  const componentCongrats = findByTestAttr(wrapper, 'component-congrats')
+  expect(componentCongrats.length).toBe(1)
 })
-test('renders no test when `success` props is false', () => {
-
+test('renders no text when `success` props is false', () => {
+  const wrapper = setup({ success: false })
+  const componentCongrats = findByTestAttr(wrapper, "component-congrats")
+  expect(componentCongrats.text()).toBe('')
 })
 test('renders non-empty congrats when `success` props is true', () => {
-
+  const wrapper = setup({ success: true })
+  const message = findByTestAttr(wrapper, "congrats-message")
+  expect(message.text().lenght).not.toBe(0)
 })
