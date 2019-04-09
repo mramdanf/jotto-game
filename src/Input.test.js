@@ -13,8 +13,8 @@ import UnconnectedInput from './UnconnectedInput'
  * @returns {ShallowWrapper}
  */
 const setup = (initialState={}) => {
-  // const store = storeFactory(initialState)
-  const wrapper = shallow(<UnconnectedInput {...initialState} />)
+  const store = storeFactory(initialState)
+  const wrapper = shallow(<Input store={store} />)
   console.log(wrapper.debug())
 }
 
