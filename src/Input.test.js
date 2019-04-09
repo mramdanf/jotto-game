@@ -1,10 +1,27 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { findByTestAttr } from '../test/testUtils'
+import { findByTestAttr, storeFactory } from '../test/testUtils'
 import Input from './Input'
+import UnconnectedInput from './UnconnectedInput'
 
-describe('renders', () => {
+
+/**
+ * Factory function to create ShallowWrapper for Input Component
+ * @function setup
+ * @param {object} initialState - Initial state for this setup.
+ * @returns {ShallowWrapper}
+ */
+const setup = (initialState={}) => {
+  // const store = storeFactory(initialState)
+  const wrapper = shallow(<UnconnectedInput {...initialState} />)
+  console.log(wrapper.debug())
+}
+
+setup()
+
+describe('renders', () =>
+ {
   describe('word has not been guessed', () => {
     test('renders component without error', () => {})
     test('renders input box', () => {})
