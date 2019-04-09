@@ -14,14 +14,13 @@ import UnconnectedInput from './UnconnectedInput'
  */
 const setup = (initialState={}) => {
   const store = storeFactory(initialState)
-  const wrapper = shallow(<Input store={store} />)
+  const wrapper = shallow(<Input store={store} />).dive()
   console.log(wrapper.debug())
 }
 
 setup()
 
-describe('renders', () =>
- {
+describe('renders', () => {
   describe('word has not been guessed', () => {
     test('renders component without error', () => {})
     test('renders input box', () => {})
