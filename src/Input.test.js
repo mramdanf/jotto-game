@@ -56,6 +56,16 @@ describe('renders', () => {
     })
   })
 })
-describe('update state', () => {
-
+describe('reudx props', () => {
+  test('has success piece of state as prop', () => {
+    const success = true
+    const wrapper = setup({ success })
+    const successProps = wrapper.instance().props.success
+    expect(successProps).toBe(success)
+  })
+  test('`guessWord` action creator is a function props', () => {
+    const wrapper = setup()
+    const guessWordProp = wrapper.instance().props.guessWord
+    expect(guessWordProp).toBeInstanceOf(Function)
+  })
 })
