@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { findByTestAttr, storeFactory } from '../test/testUtils'
-import Input from './Input'
+import Input, { UnconnectedInput } from './Input'
 
 
 /**
@@ -67,5 +67,22 @@ describe('reudx props', () => {
     const wrapper = setup()
     const guessWordProp = wrapper.instance().props.guessWord
     expect(guessWordProp).toBeInstanceOf(Function)
+  })
+})
+describe('`guessWord` action creator call', () => {
+  test('`guessWord` function triggered when submit click', () => {
+    const guessWordMock = jest.fn()
+
+    const props = {
+      guessWord: guessWordMock,
+      success: false,
+    }
+
+    const wrapper = shallow(<UnconnectedInput {...props} />)
+    const submitBtn = findByTestAttr(wrapper, 'submit-button')
+    submitBtn.simulate('click')
+
+    const submitBtnClickCount = guessWordMock.mock.calls.length
+    expect(submitBtnClickCount).toBe(1)
   })
 })
