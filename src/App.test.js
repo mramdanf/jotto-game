@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import App, { UnconnectedApp } from './App'
-import { storeFactory } from '../test/testUtils'
+import { storeFactory, findByTestAttr } from '../test/testUtils'
 
 const setup = (initialState={}) => {
   const store = storeFactory(initialState)
@@ -59,4 +59,11 @@ test('`getSecretWord` runs on app mount', () => {
   const getSecretWordCallCount = getSecretWordMock.mock.calls.length
 
   expect(getSecretWordCallCount).toBe(1)
+})
+
+test('renders total guessed word component', () => {
+  const guessedWords = [{ guessedWord: 'train', letterMatchCount: 3 }]
+  const wrapper = setup({ guessedWords })
+  const totalGuessedWordsComponent = findByTestAttr(wrapper, 'component-total-guessed-words')
+  expect(totalGuessedWordsComponent.length).toBe(1)
 })
