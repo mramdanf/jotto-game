@@ -22,7 +22,7 @@ const GuessedWords = (props) => {
         <h3>Guessed Words</h3>
         <table className="table">
           <thead className="thead-dark">
-            <tr><td>Guesse</td><td>Letter Match Count</td></tr>
+            <tr><td>#</td><td>Guesse</td><td>Letter Match Count</td></tr>
           </thead>
           <tbody>
             { guessedWordsRows }
