@@ -54,8 +54,15 @@ describe('if there are words guessed', () => {
     const guessedWordsNode = findByTestAttr(wrapper, "guessed-words")
     expect(guessedWordsNode.length).toBe(1)
   })
+  test('renders number columns of guessed words table', () => {
+    const guessedWordIndexes = findByTestAttr(wrapper, 'guessed-word-index')
+    const indexTextSet = new Set(guessedWordIndexes.map(wrapper => wrapper.text()))
+    const expectedSet = new Set(guessedWords.map((word, index) => (index+1).toString()))
+    expect(indexTextSet).toEqual(expectedSet)
+  })
   test('correct number of guessed words', () => {
     const guessedWordNodes = findByTestAttr(wrapper, 'guessed-word')
     expect(guessedWordNodes.length).toBe(guessedWords.length)
   })
+  
 })
