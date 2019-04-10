@@ -71,7 +71,8 @@ describe('reudx props', () => {
 })
 describe('`guessWord` action creator call', () => {
   let guessWordMock,
-      guessWord = 'train'
+      guessWord = 'train',
+      wrapper
   beforeEach(() => {
     // Setup mock for `guessWord`
     guessWordMock = jest.fn()
@@ -81,7 +82,7 @@ describe('`guessWord` action creator call', () => {
     }
 
     // Setup component with guessWordMock as the guessWord props
-    const wrapper = shallow(<UnconnectedInput {...props} />)
+    wrapper = shallow(<UnconnectedInput {...props} />)
 
     // Add value to input box
     wrapper.instance().inputBox.current = { value: guessWord }
@@ -97,5 +98,8 @@ describe('`guessWord` action creator call', () => {
   test('calls `guessWord` with input value as argument', () => {
     const guessWordArg = guessWordMock.mock.calls[0][0]
     expect(guessWordArg).toBe(guessWord)
+  })
+  test('input box clears on submit', () => {
+    expect(wrapper.instance().inputBox.current.value).toBe('')
   })
 })
