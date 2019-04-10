@@ -67,3 +67,9 @@ test('renders total guessed word component', () => {
   const totalGuessedWordsComponent = findByTestAttr(wrapper, 'component-total-guessed-words')
   expect(totalGuessedWordsComponent.length).toBe(1)
 })
+
+test('renders new word component', () => {
+  const wrapper = setup()
+  const newWordComponent = findByTestAttr(wrapper, 'component-new-word')
+  expect(newWordComponent.length).toBe(1)
+})
