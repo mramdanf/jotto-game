@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { getSecretWord, resetSuccess, resetGuessedWords } from './actions'
+
 class NewWord extends Component {
   render() {
     return (
@@ -22,4 +24,7 @@ const mapStateToProps = ({ success }) => {
   return { success }
 }
 
-export default connect(mapStateToProps)(NewWord)
+export default connect(
+  mapStateToProps, 
+  { getSecretWord, resetSuccess, resetGuessedWords }
+)(NewWord)

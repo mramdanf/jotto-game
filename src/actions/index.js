@@ -42,3 +42,7 @@ export const getSecretWord = () => {
       })
   }
 }
+
+export const resetSuccess = () => {}
+
+export const resetGuessedWords = () => {}

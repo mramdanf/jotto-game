@@ -29,10 +29,26 @@ describe('NewWord component renders', () => {
     expect(componentBtn.length).toBe(0)
   })
 })
-describe('NewWord button clicked', () => {
-  test('success state should be false', () => {})
-  test('guessedWords state should be zero length', () => {})
-  test('getSecretWord action creator should be called', () => {})
+describe('Redux props', () => {
+  let wrapper, componentProps
+  beforeEach(() => {
+    const initialState = { success: false }
+    wrapper = setup(initialState)
+
+    componentProps = wrapper.instance().props
+  })
+  test('Has success piece of state', () => {
+    expect(componentProps.success).toBe(false)
+  })
+  test('`resetSuccess` action creator is a function props', () => {
+    expect(componentProps.resetSuccess).toBeInstanceOf(Function)
+  })
+  test('`resetGuessedWords` action creator is a function props', () => {
+    expect(componentProps.resetGuessedWords).toBeInstanceOf(Function)
+  })
+  test('`getSecretWord` action creator is a function props', () => {
+    expect(componentProps.getSecretWord).toBeInstanceOf(Function)
+  })
 })
 
 // TODO propType checking, success props should be required
