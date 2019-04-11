@@ -3,7 +3,12 @@ import { connect } from 'react-redux'
 
 import { getSecretWord, resetSuccess, resetGuessedWords } from './actions'
 
-class NewWord extends Component {
+export class UnconnectedNewWord extends Component {
+  handleNewWordBtnClick = () => {
+    this.props.resetSuccess()
+    this.props.resetGuessedWords()
+    this.props.getSecretWord()
+  }
   render() {
     return (
       <div data-test="component-new-word">
@@ -12,6 +17,7 @@ class NewWord extends Component {
             <button 
               data-test="new-word-button"
               className="btn btn-primary"
+              onClick={this.handleNewWordBtnClick}
             >New Word</button>
           )
           : null }
@@ -27,4 +33,4 @@ const mapStateToProps = ({ success }) => {
 export default connect(
   mapStateToProps, 
   { getSecretWord, resetSuccess, resetGuessedWords }
-)(NewWord)
+)(UnconnectedNewWord)

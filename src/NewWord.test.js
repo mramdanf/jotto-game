@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { storeFactory, findByTestAttr } from "../test/testUtils";
-import NewWord from './NewWord'
+import NewWord, { UnconnectedNewWord } from './NewWord'
 
 // Testing NewWord as connected component
 
@@ -48,6 +48,35 @@ describe('Redux props', () => {
   })
   test('`getSecretWord` action creator is a function props', () => {
     expect(componentProps.getSecretWord).toBeInstanceOf(Function)
+  })
+})
+describe('Action creator call', () => {
+  let resetSuccessMock = jest.fn(),
+      resetGuessedWordsMock = jest.fn(),
+      getSecretWordMock = jest.fn()
+  beforeEach(() => {
+    // Setup props
+    const props = {
+      success: true,
+      resetSuccess: resetSuccessMock,
+      resetGuessedWords: resetGuessedWordsMock,
+      getSecretWord: getSecretWordMock
+    }
+
+    // Prepare component
+    const wrapper = shallow(<UnconnectedNewWord {...props} />)
+
+    // Find newWord button and click
+    const newWordBtn = findByTestAttr(wrapper, 'new-word-button')
+    newWordBtn.simulate('click')
+
+  })
+  test('call `resetSuccess`, `resetGuessedWords`, `getSecretWord` when newWord button click', () => {
+    const resetSuccessMockCallCount = resetSuccessMock.mock.calls.length
+    const resetGuessedWordsMockCallCount = resetGuessedWordsMock.mock.calls.length
+    const getSecretWordCallCount = getSecretWordMock.mock.calls.length
+    const total = resetSuccessMockCallCount + resetGuessedWordsMockCallCount + getSecretWordCallCount
+    expect(total).toBe(3)
   })
 })
 
