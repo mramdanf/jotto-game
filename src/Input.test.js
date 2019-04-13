@@ -35,6 +35,10 @@ describe('renders', () => {
       const submitButton = findByTestAttr(wrapper, 'submit-button')
       expect(submitButton.length).toBe(1)
     })
+    test('renders give up button', () => {
+      const giveUpButton = findByTestAttr(wrapper, 'give-up-button')
+      expect(giveUpButton.length).toBe(1)
+    })
   })
   describe('word has been guessed', () => {
     let wrapper
@@ -54,6 +58,10 @@ describe('renders', () => {
       const submitButton = findByTestAttr(wrapper, 'submit-button')
       expect(submitButton.length).toBe(0)
     })
+    test('does not render give up button', () => {
+      const giveUpButton = findByTestAttr(wrapper, 'give-up-button')
+      expect(giveUpButton.length).toBe(0)
+    })
   })
 })
 describe('reudx props', () => {
@@ -63,11 +71,32 @@ describe('reudx props', () => {
     const successProps = wrapper.instance().props.success
     expect(successProps).toBe(success)
   })
+  test('has giveUp piece of state as prop', () => {
+    const giveUp = true
+    const wrapper = setup({ giveUp })
+    const giveUpProps = wrapper.instance().props.giveUp
+    expect(giveUpProps).toBe(giveUp)
+  })
   test('`guessWord` action creator is a function props', () => {
     const wrapper = setup()
     const guessWordProp = wrapper.instance().props.guessWord
     expect(guessWordProp).toBeInstanceOf(Function)
   })
+  test('`giveUp` action creator is a function props', () => {
+    const wrapper = setup()
+    const giveUpProps = wrapper.instance().props.gaveUp
+    expect(giveUpProps).toBeInstanceOf(Function)
+  })
+})
+test('calls `giveUp` prop upon "giveUp" button click', () => {
+  const gaveUpMock = jest.fn()
+  const props = { success: false, gaveUp: gaveUpMock}
+  const wrapper = shallow(<UnconnectedInput {...props} />)
+
+  const gaveUpButton = findByTestAttr(wrapper, 'give-up-button')
+  gaveUpButton.simulate('click', { preventDefault() {} })
+
+  expect(giveUpMock.mock.calls.length).toBe(1)
 })
 describe('`guessWord` action creator call', () => {
   let guessWordMock,

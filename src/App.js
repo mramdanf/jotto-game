@@ -7,6 +7,7 @@ import Congrats from './Congrats'
 import Input from './Input'
 import TotalGuessedWords from './TotalGuessedWords'
 import NewWordButton from './NewWordButton'
+import SecretWordReveal from './SecretWordReveal'
 import { getSecretWord, resetGame } from './actions'
 
 export class UnconnectedApp extends Component {
@@ -19,8 +20,12 @@ export class UnconnectedApp extends Component {
         <h1>Jotto</h1>
         <div>The secret word is {this.props.secretWord}</div>
         <Congrats success={this.props.success} />
+        <SecretWordReveal 
+          display={this.props.giveUp}
+          secretWord={this.props.secretWord}
+        />
         <NewWordButton 
-          display={this.props.success} 
+          display={this.props.success || this.props.giveUp} 
           resetAction={this.props.resetGame} 
         />
         <Input />
@@ -34,11 +39,12 @@ export class UnconnectedApp extends Component {
   }
 }
 
-const mapStateToProps = ({ success, secretWord, guessedWords }) => {
+const mapStateToProps = ({ success, secretWord, guessedWords, giveUp }) => {
   return {
     success,
     secretWord,
-    guessedWords
+    guessedWords,
+    giveUp,
   }
 }
 
