@@ -38,6 +38,12 @@ describe('redux props', () => {
     const getSecretWordProp = wrapper.instance().props.getSecretWord
     expect(getSecretWordProp).toBeInstanceOf(Function)
   })
+
+  test('`resetAction` action creator is a function props', () => {
+    const wrapper = setup()
+    const resetActionProp = wrapper.instance().props.resetGame
+    expect(resetActionProp).toBeInstanceOf(Function)
+  })
 })
 
 test('`getSecretWord` runs on app mount', () => {

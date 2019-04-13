@@ -6,7 +6,8 @@ import GuessedWords from './GuessedWords'
 import Congrats from './Congrats'
 import Input from './Input'
 import TotalGuessedWords from './TotalGuessedWords'
-import { getSecretWord } from './actions'
+import NewWordButton from './NewWordButton'
+import { getSecretWord, resetGame } from './actions'
 
 export class UnconnectedApp extends Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ export class UnconnectedApp extends Component {
         <Congrats success={this.props.success} />
         <Input />
         <GuessedWords guessedWords={this.props.guessedWords} />
+        <NewWordButton display={this.props.success} resetAction={this.props.resetGame} />
         <TotalGuessedWords 
           data-test="component-total-guessed-words"
           totalGuessedWords={this.props.guessedWords.length} 
@@ -37,4 +39,4 @@ const mapStateToProps = ({ success, secretWord, guessedWords }) => {
   }
 }
 
-export default connect(mapStateToProps, { getSecretWord })(UnconnectedApp);
+export default connect(mapStateToProps, { getSecretWord, resetGame })(UnconnectedApp);

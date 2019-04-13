@@ -13,6 +13,8 @@ export default (state=[], action) => {
         ...state,
         action.payload
       ]
+    case actionTypes.RESET_GAME:
+      return []
     default:
       return state
   }
