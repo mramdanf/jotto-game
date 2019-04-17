@@ -6,7 +6,12 @@ describe('guessWord action dispatcher', () => {
   const unsuccessfullGuess = 'train'
   describe('no guessed words', () => {
     let store
-    const initialState = { secretWord, giveUp: false, userEnter: null}
+    const initialState = { 
+      secretWord, 
+      giveUp: false, 
+      userEnter: null,
+      serverError: false,
+    }
     beforeEach(() => {
       store = storeFactory(initialState)
     })
@@ -39,7 +44,13 @@ describe('guessWord action dispatcher', () => {
   })
   describe('some guessed words', () => {
     const guessedWords = [{ guessedWord: 'agile', letterMatchCount: 1 }]
-    const initialState = { guessedWords, secretWord, giveUp: false, userEnter: null, }
+    const initialState = { 
+      guessedWords, 
+      secretWord, 
+      giveUp: false, 
+      userEnter: null,
+      serverError: false,
+    }
     let store
     beforeEach(() => {
       store = storeFactory(initialState)

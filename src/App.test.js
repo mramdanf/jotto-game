@@ -5,8 +5,12 @@ import App, { UnconnectedApp } from './App'
 import { storeFactory, findByTestAttr } from '../test/testUtils'
 
 const defaultState = {
+  success: false,
   giveUp: false,
   secretWord: 'party',
+  serverError: false,
+  guessedWords: [],
+  userEnter: null,
 }
 
 const setup = (initialState={}) => {
@@ -38,6 +42,10 @@ describe('redux props', () => {
   test('has userEnter piece of state in the props', () => {
     const wrapper = setup({ userEnter: null })
     expect(wrapper.instance().props.userEnter).toBeNull()
+  })
+  test('has serverError piece of state in the props', () => {
+    const wrapper = setup({ serverError: false })
+    expect(wrapper.instance().props.serverError).toBe(false)
   })
   test('`getSecretWord` action creator is a function props', () => {
     const wrapper = setup()
@@ -82,8 +90,13 @@ test('renders userEnteredForm when userEnter props is "inProgess"', () => {
   const component = findByTestAttr(wrapper, 'use-user-entered-word')
   expect(component.length).toBe(1)
 })
-test('renders inputComponent when userEnter props is not "inProgess"', () => {
-  const wrapper = setup({ userEnter: null })
+test('renders inputComponent when userEnter props is "done"', () => {
+  const wrapper = setup({ userEnter: 'done' })
   const component = findByTestAttr(wrapper, 'use-random-secret-word')
   expect(component.length).toBe(1)
+})
+test('renders serverErrorComponent when `serverError` props is true', () => {
+  const wrapper = setup({ serverError: true })
+  const serverErrorCompo = findByTestAttr(wrapper, 'display-server-error')
+  expect(serverErrorCompo.length).toBe(1)
 })
