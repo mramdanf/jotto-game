@@ -96,7 +96,7 @@ test('calls `giveUp` prop upon "giveUp" button click', () => {
   const gaveUpButton = findByTestAttr(wrapper, 'give-up-button')
   gaveUpButton.simulate('click', { preventDefault() {} })
 
-  expect(giveUpMock.mock.calls.length).toBe(1)
+  expect(gaveUpMock.mock.calls.length).toBe(1)
 })
 describe('`guessWord` action creator call', () => {
   let guessWordMock,

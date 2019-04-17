@@ -32,17 +32,19 @@ export class UnconnectedInput extends Component {
       : (
         <form className="form-inline">
           <input
-            data-test="input-box"
-            className="mb-2 mx-sm-3"
-            id="word-guess"
-            type="text"
-            ref={this.inputBox}
-            placeholder="enter guess"/>
+              data-test="input-box"
+              className="mb-2 form-control"
+              id="word-guess"
+              type="text"
+              ref={this.inputBox}
+              placeholder="enter guess"
+          />
           <button
             data-test="submit-button"
             className="btn btn-primary mb-2"
             type="submit"
-            onClick={this.handleSubmitGuessWord}>
+            onClick={this.handleSubmitGuessWord}
+          >
             Submit
           </button>
           <button

@@ -8,17 +8,37 @@ import Input from './Input'
 import TotalGuessedWords from './TotalGuessedWords'
 import NewWordButton from './NewWordButton'
 import SecretWordReveal from './SecretWordReveal'
-import { getSecretWord, resetGame } from './actions'
+import EnterWordButton from './EnterWordButton'
+import EnterWordForm from './EnterWordForm'
+import { getSecretWord, resetGame, setUserEntering, setUserSecretWord } from './actions'
 
 export class UnconnectedApp extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleEnterWordFormSubmit = this.handleEnterWordFormSubmit.bind(this)
+  }
+
   componentDidMount() {
     this.props.getSecretWord()
   }
+
+  handleEnterWordFormSubmit(userSecretWord) {
+    this.props.setUserSecretWord(userSecretWord)
+  }
+
   render() {
-    return (
-      <div className="container">
-        <h1>Jotto</h1>
-        <div>The secret word is {this.props.secretWord}</div>
+    let contents = this.props.userEnter === 'inProgress'
+    ? (
+      <EnterWordForm
+        data-test="use-user-entered-word"
+        formAction={this.handleEnterWordFormSubmit}
+      />
+    )
+    : (
+      <div 
+        data-test="use-random-secret-word"
+      >
         <Congrats success={this.props.success} />
         <SecretWordReveal 
           display={this.props.giveUp}
@@ -34,18 +54,37 @@ export class UnconnectedApp extends Component {
           data-test="component-total-guessed-words"
           totalGuessedWords={this.props.guessedWords.length} 
         />
+        <EnterWordButton 
+          display={this.props.guessedWords.length === 0}
+          buttonAction={this.props.setUserEntering}
+        />
       </div>
-    );
+    )
+    return (
+      <div className="container">
+        <h1>Jotto</h1>
+        <div>The secret word is {this.props.secretWord}</div>
+        { contents }
+      </div>
+    )
   }
 }
 
-const mapStateToProps = ({ success, secretWord, guessedWords, giveUp }) => {
+const mapStateToProps = ({ success, secretWord, guessedWords, giveUp, userEnter }) => {
   return {
     success,
     secretWord,
     guessedWords,
     giveUp,
+    userEnter,
   }
 }
 
-export default connect(mapStateToProps, { getSecretWord, resetGame })(UnconnectedApp);
+const actions = {
+  getSecretWord,
+  resetGame,
+  setUserEntering,
+  setUserSecretWord,
+}
+
+export default connect(mapStateToProps, actions)(UnconnectedApp);

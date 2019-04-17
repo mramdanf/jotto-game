@@ -8,6 +8,8 @@ export const actionTypes = {
   SET_SECRET_WORD: 'SET_SECRET_WORD',
   RESET_GAME: 'RESET_GAME',
   GIVE_UP: 'GIVE_UP',
+  USER_ENTERING: 'USER_ENTERING',
+  USER_ENTERED: 'USER_ENTERED',
 }
 
 /**
@@ -56,4 +58,17 @@ export const resetGame = () => {
 
 export const gaveUp = () => {
   return { type: actionTypes.GIVE_UP }
+}
+
+export const setUserSecretWord = (secretWord) => {
+  return (dispatch) => {
+    dispatch({ type: actionTypes.USER_ENTERED })
+    dispatch({ type: actionTypes.SET_SECRET_WORD, payload: secretWord })
+  }
+}
+
+export const setUserEntering = () => {
+  return (dispatch) => {
+    dispatch({ type: actionTypes.USER_ENTERING })
+  }
 }

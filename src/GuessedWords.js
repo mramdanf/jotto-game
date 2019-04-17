@@ -5,7 +5,9 @@ const GuessedWords = (props) => {
   let content = null
   if (!props.guessedWords.length) {
     content = (
-      <span data-test="guess-instruction">
+      <span 
+        data-test="guess-instruction"
+      >
         Try to guess the secret word!
       </span>
     )
